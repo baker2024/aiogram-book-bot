@@ -1,14 +1,11 @@
 from aiogram import Router
 from aiogram.types import Message
-from lexicon.lexicon import LEXICON_RU
-
 
 router = Router()
 
 
+# Этот хэндлер будет реагировать на любые сообщения пользователя,
+# не предусмотренные логикой работы бота
 @router.message()
 async def send_echo(message: Message):
-    try:
-        await message.send_copy(chat_id=message.chat.id)
-    except TypeError:
-        await message.reply(text=LEXICON_RU["no_echo"])
+    await message.answer(f"Это эхо! {message.text}")
